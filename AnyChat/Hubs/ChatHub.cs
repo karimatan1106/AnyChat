@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using AnyChat.Data;
@@ -14,7 +13,6 @@ namespace AnyChat.Hubs
     public class ChatHub : Hub
     {
         #region フィールド
-        private AnyChatDBContext _db = new AnyChatDBContext();
         private Random _random;
         private Dictionary<int, (string title, string url)> _randomDic;
         #endregion
@@ -54,10 +52,10 @@ namespace AnyChat.Hubs
 
         #region メソッド
         /// <summary>
-        /// txtChat の入力ボックスでエンターキーが押された際に発火
+        /// txtSpeech の入力ボックスでエンターキーが押された際に発火
         /// </summary>
-        /// <param name="comment"></param>
-        public void EnterEscapeTxtChat(string comment)
+        /// <param name="speech"></param>
+        public void EnterEscapeTxtSpeech(string speech)
         {
             ////GearHostにデプロイする場合に以下の手法だと上手くいかない
             ////日本時間のタイムゾーン情報の取得
@@ -72,29 +70,42 @@ namespace AnyChat.Hubs
             var commentDatetime = jst.ToString("yyyy/MM/dd HH:mm:ss");
 
             //入力文字列をサニタイズする
-            comment = HttpUtility.HtmlEncode(comment);
+            speech = HttpUtility.HtmlEncode(speech);
 
             //入力文字列の中にURLがあればaタグを付与する
             var urlPattern = new Regex(@"http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?");
-            var urlPatternMatch = urlPattern.Match(comment);
+            var urlPatternMatch = urlPattern.Match(speech);
             if (urlPatternMatch.Success)
             {
-                comment = urlPattern.Replace(comment, $"<a href=\"{urlPatternMatch}\">{urlPatternMatch}</a>");
+                speech = urlPattern.Replace(speech, $"<a href=\"{urlPatternMatch}\">{urlPatternMatch}</a>");
             }
 
             var (title, url) = _randomDic[_random.Next(_randomDic.Count)];
-            comment = commentDatetime + " - " + comment;
-            Clients.All.enterEscapeTxtChat(title, url, comment);
+            speech = commentDatetime + " - " + speech;
+            Clients.All.enterEscapeTxtChat(title, url, speech);
+
             var chat = new Chat
             {
                 UserName = Environment.UserName,
                 RandamTitle = title,
                 RandamUrl = url,
-                Comment = comment,
+                Comment = speech,
                 CommentDateTIme = jst,
             };
-            _db.Chats.Add(chat);
-            _db.SaveChanges();
+
+            using (var db = new AnyChatDBContext())
+            {
+                db.Chats.Add(chat);
+                db.SaveChanges();
+            }
+        }
+        /// <summary>
+        /// 自分以外にプッシュ通知を行う
+        /// </summary>
+        /// <param name="speech"></param>
+        public void PushNotification(string speech)
+        {
+            Clients.Others.pushNotification(speech);
         }
         #endregion
     }
