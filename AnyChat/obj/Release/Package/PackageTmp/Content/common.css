@@ -1,0 +1,39 @@
+﻿.deleteBlueLightUpAndAddShaddow {
+    box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.200);
+}
+
+.deleteBlueLightUpAndAddShaddow:focus, input:hover, input:active, textarea:hover, textarea:active {
+    transition: .3s;
+    outline: 0;
+    border-color: var(--accent_color,#fafaf0);
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.200);
+    transform: scale(1.001,1.001);
+}
+
+.googleTextBox {
+    height: 44px;
+    width: 635px;
+    margin-top: 15px;
+    max-width: inherit;
+    border-color: gainsboro;
+}
+
+.googleImage {
+    height: 85px;
+    margin-left: -5px;
+}
+
+.googleButton {
+    width: 100px;
+    height: 45px;
+    margin-top: 13px;
+}
+
+.googleSearchBar {
+    background-color: #fafafa;
+    /*border-bottom-style: groove;*/
+    
+}
+.displayFlex {
+    display: flex;
+}

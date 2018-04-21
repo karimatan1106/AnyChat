@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="AnyChat-Web.config Connection String" description="AnyChat データベースに接続するためにアプリケーションによって web.config で使用される接続文字列。" defaultValue="Data Source=den1.mssql6.gear.host;Initial Catalog=anychat;Integrated Security=False;User ID=anychat;Password=Si4q_AF6JE!7;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\y\\documents\\visual\ studio\ 2017\\Projects\\AnyChat\\AnyChat\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AnyChat']/@connectionString" />
+  </parameter>
+</parameters>
