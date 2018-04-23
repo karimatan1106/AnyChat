@@ -246,7 +246,6 @@ C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\ja\System.Web.WebPages.resources
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\ja\System.Web.WebPages.Deployment.resources.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\ja\System.Web.WebPages.Razor.resources.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\ja\System.Web.Optimization.resources.dll
-C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.csprojResolveAssemblyReference.cache
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.Migrations.CreateTable_Chats.resources
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.Migrations.CreateTable_Chats2.resources
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.csproj.GenerateResource.cache
