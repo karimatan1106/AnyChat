@@ -253,3 +253,4 @@ C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.csproj.CoreCompile
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.csproj.CopyComplete
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.pdb
+C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.csprojResolveAssemblyReference.cache

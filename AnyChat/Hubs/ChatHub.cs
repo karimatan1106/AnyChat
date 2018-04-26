@@ -69,15 +69,17 @@ namespace AnyChat.Hubs
             var jst = DateTime.UtcNow.AddHours(9);
             var commentDatetime = jst.ToString("yyyy/MM/dd HH:mm:ss");
 
+            //入力文字列の中にURLが存在するかどうかを判定だけする
+            var urlPattern = new Regex(@"(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)");
+            var urlPatternMatch = urlPattern.Match(speech);
+
             //入力文字列をサニタイズする
             speech = HttpUtility.HtmlEncode(speech);
 
-            //入力文字列の中にURLがあればaタグを付与する
-            var urlPattern = new Regex(@"http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?");
-            var urlPatternMatch = urlPattern.Match(speech);
+            //入力文字列の中にURLが存在する場合はアンカータグに変換する
             if (urlPatternMatch.Success)
             {
-                speech = urlPattern.Replace(speech, $"<a href=\"{urlPatternMatch}\">{urlPatternMatch}</a>");
+                speech = speech.Replace(urlPatternMatch.Value, $"<a href=\"{urlPatternMatch}\">{urlPatternMatch}</a>");
             }
 
             var (title, url) = _randomDic[_random.Next(_randomDic.Count)];

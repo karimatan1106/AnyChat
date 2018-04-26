@@ -8,36 +8,40 @@
     //Hubのプロキシ・オブジェクトを作成
     var echo = connection.createHubProxy("chatHub");
 
-    //サーバから呼び出される関数を登録
-    echo.on("enterEscapeTxtChat", function (title, url, comment) {
+    //発言された場合に発火
+    //発言をdivChatに追加する
+    echo.on("enterEscapeTxtChat", function (title, url, speech) {
         $("#divChat").prepend(
             "<div><a href=\"\"><span style=\"font-size:18px\">" + title + "</span></a></div>" +
             "<div><span style=\"color:#006621; font-size:13px;\">" + url + "</span></div>" +
-            "<div style=\"margin-bottom: 20px;line-height:100%;\"><span style=\"font-size:13px;\">" + comment + "</span></div>"
+            "<div style=\"margin-bottom: 20px;line-height:100%;\"><span style=\"font-size:13px;\">" + speech + "</span></div>"
         );
     });
-
+    //発言された場合に発火
+    //自分以外に発言の通知を行う
+    echo.on("pushNotification", function (speech) {
+        // hasを使うとboolで許可情報を取得できます
+        if (Push.Permission.get() !== Push.Permission.DENIED
+            && Push.Permission.has()) {
+            Push.create(speech, {
+                //body: '更新をお知らせします！',
+                //icon: 'icon.png',
+                timeout: 3000, // 通知が消えるタイミング
+                vibrate: [100, 100, 100], // モバイル端末でのバイブレーション秒数
+                onClick: function () {
+                    // 通知がクリックされた場合の設定
+                    this.close();
+                }
+            });
+        }
+    });
     //txtChat の入力ボックスでエンターキーが押された場合のイベントハンドラ
     $("#txtSpeech").keypress(function (e) {
         var speech = $("#txtSpeech").val();
         if (e.which == 13
             && speech !== "") {
-            echo.invoke("EnterEscapeTxtChat", speech);
-
-            // hasを使うとboolで許可情報を取得できます
-            if (Push.Permission.has()) {
-                Push.create(speech, {
-                    //body: '更新をお知らせします！',
-                    icon: 'icon.png',
-                    timeout: 3000, // 通知が消えるタイミング
-                    vibrate: [100, 100, 100], // モバイル端末でのバイブレーション秒数
-                    onClick: function () {
-                        // 通知がクリックされた場合の設定
-                        this.close();
-                    }
-                });
-            }
-
+            echo.invoke("EnterEscapeTxtSpeech", speech);
+            echo.invoke("PushNotification", speech);
             $("#txtSpeech").val("");
         }
     });
@@ -52,8 +56,4 @@
     //接続を開始
     connection.start(function () {
     });
-
-    var escapeHTML = function (val) {
-        return $('<div />').text(val).html();
-    };
 });
