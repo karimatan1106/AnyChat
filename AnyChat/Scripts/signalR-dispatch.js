@@ -50,11 +50,16 @@
     //セッションタイムアウトした場合に再接続を行う
     connection.disconnected(function () {
         setTimeout(function () {
-            $.connection.hub.start();
+            connection.start().done(function () {
+            }).fail(function (error) {
+                console.log('Invocation of start failed. Error:' + error)
+            });
         }, 5000); // Restart connection after 5 seconds.
     });
 
     //接続を開始
-    connection.start(function () {
+    connection.start().done(function () {
+    }).fail(function (error) {
+        console.log('Invocation of start failed. Error:' + error)
     });
 });
