@@ -8,18 +8,18 @@ namespace AnyChat.Models
     {
         protected override void Seed(AnyChatDBContext context)
         {
-            var chats = new List<Chat>
-            {
-                new Chat
-                {
-                    RandamTitle = "hoge",
-                    RandamUrl = "hogeUrl",
-                    Comment = "hogeTarou",
-                },
-            };
+            //var chats = new List<Chat>
+            //{
+            //    new Chat
+            //    {
+            //        RandamTitle = "hoge",
+            //        RandamUrl = "hogeUrl",
+            //        Speech = "hogeTarou",
+            //    },
+            //};
 
-            context.Chats.AddRange(chats);
-            context.SaveChanges();
+            //context.Chats.AddRange(chats);
+            //context.SaveChanges();
         }
     }
 }

@@ -1,0 +1,39 @@
+﻿@model AnyChat.Models.Room
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutBase.cshtml";
+}
+@*@RenderBody部分の記述*@
+<header></header>
+
+<style>
+    .head {
+        height: 30vh;
+    }
+</style>
+
+<div class="head"></div>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div style="text-align:center;" class="col-md-12 col-md-offset-4">
+            <a href="https://www.google.co.jp/">
+                <img src="~/Content/Images/GoogleBigLogo.png" class="googleImage" />
+            </a>
+            <br>
+            <form class="col-md-12" action="~/Home/EnteringToChat" method="post">
+                <input name="txtRoomPassword" type="text" class="form-control googleTextBox deleteBlueLightUpAndAddShaddow" />
+            </form>
+            <br>
+            <div class="btn-group col-md-offset-4">
+                <button class="form-control btn btn-secondary" style="font-size:12px;">Google検索</button>
+                <div style="width:10px;"></div>
+                <button class="form-control btn btn-secondary" style="font-size:12px;">I'm Feeling Lucky</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+<footer></footer>

@@ -1,0 +1,58 @@
+﻿<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+@model IEnumerable<AnyChat.Models.Room>
+
+@{
+    var isPublicRoom = (bool)ViewData["IsPublicRoom"];
+}
+
+@if (Model != null)
+{
+<div class="container">
+    <ul class="list-group">
+        @if (isPublicRoom)
+        {
+            foreach (var room in Model.Where(x => x.IsPublicRoom == isPublicRoom)
+                                       .OrderBy(x => x.DisplayOrder)
+                                       .ThenBy(x => x.RoomName))
+            {
+                var roomUri = $"/Home/Chat?roomId={@room.RoomId}";
+                <li class="list-group-item list-group-item-action" style="display:inline-block;margin:3px 0 0 -15px;padding:0;">
+                    <a href=@roomUri class="list-group-item" style="display:block;width:100%;">
+                        @Html.Raw(room.RoomName)
+
+                        @if (room.Chats == null)
+                        {
+                            <span class="badge">0</span>
+                        }
+                        else
+                        {
+                            <span class="badge">@room.Chats.Count</span>
+                        }
+                    </a>
+                </li>
+            }
+        }
+        else
+        {
+            foreach (var room in Model.Where(x => x.IsPublicRoom == isPublicRoom).OrderBy(x => x.RoomName))
+            {
+                var roomUri = $"/Home/Chat?roomId={@room.RoomId}";
+                <li class="list-group-item list-group-item-action" style="display:inline-block;margin:3px 0 0 -15px;padding:0;">
+                    <a href=@roomUri class="list-group-item" style="display:block;width:100%;">
+                        @Html.Raw(room.RoomName)
+
+                        @if (room.Chats == null)
+                        {
+                            <span class="badge">0</span>
+                        }
+                        else
+                        {
+                            <span class="badge">@room.Chats.Count</span>
+                        }
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+</div>
+}

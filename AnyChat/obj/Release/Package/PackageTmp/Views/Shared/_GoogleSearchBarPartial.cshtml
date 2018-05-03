@@ -1,0 +1,42 @@
+﻿@*Googleの検索ページ上部*@
+
+<link href="https://fonts.googleapis.com/earlyaccess/mplus1p.css" rel="stylesheet" />
+<div>
+    <div class="googleSearchBar">
+        <div style="padding-top:5px;height:64px;">
+            <div class="form-group displayFlex">
+                <a href="https://www.google.co.jp/">
+                    <img src="~/Content/Images/GoogleLogo.png" class="googleImage" />
+                </a>
+                <input id="txtSpeech" type="text" class="form-control googleTextBox deleteBlueLightUpAndAddShaddow" />
+            </div>
+        </div>
+
+        @*<img src="~/Content/Images/ヘッダタブ.PNG" style="margin-left:150px;margin-top:13px;" />*@
+        <div style="height:58px;max-width:640px;" class="displayFlex">
+            <nav id="basic-tab-bar" data-mdc-auto-init="MDCTabBar" class="mdc-tab-bar" style="margin-left:150px;margin-top:10px;">
+                <a class="mdc-tab mdc-tab--active" style="min-width:5px;min-height:5px;width:20px;padding:0 15px;font-size:13px;">すべて</a>
+                <a class="mdc-tab" style="min-width:5px;min-height:5px;width:20px;padding:0 15px;font-size:13px;">画像</a>
+                <a class="mdc-tab" style="min-width:5px;min-height:5px;width:20px;padding:0 15px;font-size:13px;">ショッピング</a>
+                <a class="mdc-tab" style="min-width:5px;min-height:5px;width:20px;padding:0 10px;font-size:14px;">動画</a>
+                <a class="mdc-tab" style="min-width:5px;min-height:5px;width:20px;padding:0 16px;font-size:13px;">ニュース</a>
+                <span class="mdc-tab-bar__indicator mdc-tab-label-ink-color"></span>
+            </nav>
+            <nav id="basic-tab-bar2" class="mdc-tab-bar" style="margin-left:0px;margin-top:10px;">
+                <a class="mdc-tab" style="min-width:5px;min-height:5px;width:20px;padding:0 15px;font-size:13px;">
+                    もっと見る
+                </a>
+                <div style="margin-left:35px;"></div>
+                <a class="mdc-tab" style="min-width:5px;min-height:5px;width:20px;padding:0 15px;font-size:14px;">
+                    設定
+                </a>
+                <a class="mdc-tab" style="min-width:5px;min-height:5px;width:20px;padding:0 15px;font-size:13px;">
+                    ツール
+                </a>
+            </nav>
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script>mdc.autoInit()</script>
+<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">

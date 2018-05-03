@@ -1,0 +1,29 @@
+﻿@Scripts.Render("~/bundles/signalr")
+@model IEnumerable<AnyChat.Models.Chat>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_GoogleSearchResultLayout.cshtml";
+}
+@*@RenderBody部分の記述*@
+<div class="displayFlex" style="width:1098px">
+    <div id="divChat" class="container" style="padding:0px;margin:0px; width:635px;word-wrap:break-word;word-break:break-all;">
+        @if (Model != null)
+        {
+            foreach (var chat in Model)
+            {
+                <div>
+                    <a href="">
+                        <span style="font-size:18px">@chat.RandamTitle</span>
+                    </a>
+                </div>
+                <div>
+                    <span style="color:#006621; font-size:13px;">@chat.RandamUrl</span>
+                </div>
+                <div style="margin-bottom:20px;line-height:100%;">
+                    <span style="font-size:13px;">@Html.Raw(chat.Speech)</span>
+                </div>
+            }
+        }
+    </div>
+    <img src="~/Content/Images/C-Sharp_SearchResult.png" height="227" width="463" style="margin-left:20px;" />
+</div>

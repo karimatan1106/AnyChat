@@ -31,7 +31,7 @@ namespace AnyChat
                       "~/node_modules/push.js/bin/push.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css"));
+                      "~/Content/bootstrap*"));
             bundles.Add(new StyleBundle("~/Content/common").Include(
                       "~/Content/common.css"));
         }

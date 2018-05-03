@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google検索</title>
+
+    @*push通知用のライブラリ*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.min.js"></script>
+
+    @*Push通知をIEでも使えるように読み込むライブラリ*@
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/common")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body>
+    @Html.Partial("_GoogleSearchBarPartial")
+    <div class="body-content">
+        <div style="padding-left:160px;">
+            <div style="height:5px">
+            </div>
+            <div style="height:45px;">
+                <span style="font-size:13px;color:dimgray;">約 7,870,000 件 （0.23 秒）</span>
+            </div>
+
+            @RenderBody()
+            <footer>
+                @*Gooooooooogleを差し込みたい*@
+            </footer>
+        </div>
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

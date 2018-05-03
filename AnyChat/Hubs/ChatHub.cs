@@ -54,8 +54,10 @@ namespace AnyChat.Hubs
         /// <summary>
         /// txtSpeech の入力ボックスでエンターキーが押された際に発火
         /// </summary>
+        /// <param name="roomId"></param>
+        /// <param name="groupName"></param>
         /// <param name="speech"></param>
-        public void EnterEscapeTxtSpeech(string speech)
+        public void EnterEscapeTxtSpeech(string roomId, string groupName, string speech)
         {
             ////GearHostにデプロイする場合に以下の手法だと上手くいかない
             ////日本時間のタイムゾーン情報の取得
@@ -63,11 +65,11 @@ namespace AnyChat.Hubs
 
             ////日本時間(UTC+9)への変換を行う
             //var jst = new DateTimeOffset(DateTime.Now,jstTimeZoneInfo.BaseUtcOffset);
-            //var commentDatetime = jst.ToString("yyyy/MM/dd HH:mm:ss");
+            //var speechDatetime = jst.ToString("yyyy/MM/dd HH:mm:ss");
 
             //日本時間(UTC+9)への変換を行う
             var jst = DateTime.UtcNow.AddHours(9);
-            var commentDatetime = jst.ToString("yyyy/MM/dd HH:mm:ss");
+            var speechDatetime = jst.ToString("yyyy/MM/dd HH:mm:ss");
 
             //入力文字列の中にURLが存在するかどうかを判定だけする
             var urlPattern = new Regex(@"(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)");
@@ -83,16 +85,19 @@ namespace AnyChat.Hubs
             }
 
             var (title, url) = _randomDic[_random.Next(_randomDic.Count)];
-            speech = commentDatetime + " - " + speech;
-            Clients.All.enterEscapeTxtChat(title, url, speech);
+            speech = speechDatetime + " - " + speech;
+
+            //グループに発言を書き込む
+            Clients.Group(groupName).enterEscapeTxtChat(title, url, speech);
 
             var chat = new Chat
             {
                 UserName = Environment.UserName,
                 RandamTitle = title,
                 RandamUrl = url,
-                Comment = speech,
-                CommentDateTIme = jst,
+                Speech = speech,
+                SpeechDateTIme = jst,
+                RoomId = int.Parse(roomId),
             };
 
             using (var db = new AnyChatDBContext())
@@ -100,14 +105,15 @@ namespace AnyChat.Hubs
                 db.Chats.Add(chat);
                 db.SaveChanges();
             }
+
+            //グループ内の自分以外にプッシュ通知を行う
+            Clients.Group(groupName, new[] { Context.ConnectionId }).pushNotification(speech);
         }
-        /// <summary>
-        /// 自分以外にプッシュ通知を行う
-        /// </summary>
-        /// <param name="speech"></param>
-        public void PushNotification(string speech)
+        // 指定されたグループへ参加する
+        public void Join(string groupName)
         {
-            Clients.Others.pushNotification(speech);
+            Groups.Add(Context.ConnectionId, groupName);
+            Clients.Group(groupName).joinNotify(Context.ConnectionId);
         }
         #endregion
     }

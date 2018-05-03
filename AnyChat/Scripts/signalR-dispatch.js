@@ -1,4 +1,8 @@
 ﻿$(function () {
+
+    var roomId = "";
+    var groupName = "";
+
     //通知の許可を求める
     Push.Permission.request();
 
@@ -41,8 +45,7 @@
         var speech = $("#txtSpeech").val();
         if (e.which == 13
             && speech !== "") {
-            echo.invoke("EnterEscapeTxtSpeech", speech);
-            echo.invoke("PushNotification", speech);
+            echo.invoke("EnterEscapeTxtSpeech", roomId, groupName, speech);
             $("#txtSpeech").val("");
         }
     });
@@ -51,6 +54,7 @@
     connection.disconnected(function () {
         setTimeout(function () {
             connection.start().done(function () {
+                onSuccessConnection();
             }).fail(function (error) {
                 console.log('Invocation of start failed. Error:' + error)
             });
@@ -59,7 +63,30 @@
 
     //接続を開始
     connection.start().done(function () {
+        onSuccessConnection();
     }).fail(function (error) {
         console.log('Invocation of start failed. Error:' + error)
     });
+
+    //接続成功時に発火
+    function onSuccessConnection() {
+        roomId = getQueryString()["roomId"];
+        groupName = "Group" + roomId;
+        echo.invoke("join", groupName);
+    }
+
+    function getQueryString() {
+        var vars = [], max = 0, hash = "", array = "";
+        var url = window.location.search;
+
+        hash = url.slice(1).split('&');
+        max = hash.length;
+        for (var i = 0; i < max; i++) {
+            array = hash[i].split('=');
+            vars.push(array[0]);
+            vars[array[0]] = array[1];
+        }
+
+        return vars;
+    }
 });

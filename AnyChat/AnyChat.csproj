@@ -171,21 +171,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Data\AnyChatDBContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\ChatHub.cs" />
-    <Compile Include="Migrations\201804081354003_CreateTable_Chats.cs" />
-    <Compile Include="Migrations\201804081354003_CreateTable_Chats.Designer.cs">
-      <DependentUpon>201804081354003_CreateTable_Chats.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804081355454_CreateTable_Chats2.cs" />
-    <Compile Include="Migrations\201804081355454_CreateTable_Chats2.Designer.cs">
-      <DependentUpon>201804081355454_CreateTable_Chats2.cs</DependentUpon>
+    <Compile Include="Migrations\201804300321187_CreateTable.cs" />
+    <Compile Include="Migrations\201804300321187_CreateTable.Designer.cs">
+      <DependentUpon>201804300321187_CreateTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AnyChatInitializer.cs" />
+    <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Chat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -200,7 +198,8 @@
     <Content Include="Content\common.css" />
     <EmbeddedResource Include="Content\Images\C-Sharp_SearchResult.JPG" />
     <Content Include="Content\Images\C-Sharp_SearchResult.png" />
-    <Content Include="Content\Images\Googleロゴ.png" />
+    <Content Include="Content\Images\GoogleBigLogo.PNG" />
+    <Content Include="Content\Images\GoogleLogo.png" />
     <Content Include="Content\Images\ヘッダタブ.PNG" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -231,6 +230,9 @@
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="bower.json" />
+    <EmbeddedResource Include="Migrations\201804300321187_CreateTable.resx">
+      <DependentUpon>201804300321187_CreateTable.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\PublishProfiles\anychat - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\anychat - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -274,8 +276,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_GoogleLayout.cshtml" />
+    <Content Include="Views\Home\Chat.cshtml" />
+    <Content Include="Views\Shared\_GoogleSearchResultLayout.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -285,9 +287,16 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Shared\_GoogleSearchPartial.cshtml" />
-    <Content Include="Views\Shared\_CurrentTimePartial.cshtml" />
+    <Content Include="Views\Home\Entering.cshtml" />
+    <Content Include="Views\Shared\_GoogleSearchBarPartial.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_RoomPartial.cshtml" />
+    <Content Include="Views\Rooms\Create.cshtml" />
+    <Content Include="Views\Rooms\Delete.cshtml" />
+    <Content Include="Views\Rooms\Details.cshtml" />
+    <Content Include="Views\Rooms\Edit.cshtml" />
+    <Content Include="Views\Rooms\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutBase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -304,14 +313,6 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804081354003_CreateTable_Chats.resx">
-      <DependentUpon>201804081354003_CreateTable_Chats.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804081355454_CreateTable_Chats2.resx">
-      <DependentUpon>201804081355454_CreateTable_Chats2.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

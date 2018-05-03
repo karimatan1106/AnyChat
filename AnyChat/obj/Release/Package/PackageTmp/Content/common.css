@@ -37,3 +37,10 @@
 .displayFlex {
     display: flex;
 }
+
+.mdcReset {
+    min-width: 5px;
+    min-height: 5px;
+    width: 20px;
+    padding: 0 15px;
+}

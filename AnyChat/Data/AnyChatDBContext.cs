@@ -14,6 +14,10 @@ namespace AnyChat.Data
         /// チャットテーブル
         /// </summary>
         public DbSet<Chat> Chats { get; set; }
+        /// <summary>
+        /// ルームテーブル
+        /// </summary>
+        public DbSet<Room> Rooms { get; set; }
         #endregion
 
         #region コンストラクタ
