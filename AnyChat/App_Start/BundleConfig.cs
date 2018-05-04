@@ -27,8 +27,6 @@ namespace AnyChat
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
                       "~/Scripts/jquery.signalR-2.2.3.js",
                       "~/Scripts/signalR-dispatch.js"));
-            bundles.Add(new ScriptBundle("~/bundles/push").Include(
-                      "~/node_modules/push.js/bin/push.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap*"));

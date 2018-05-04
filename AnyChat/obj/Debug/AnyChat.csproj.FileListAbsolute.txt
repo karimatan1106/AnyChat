@@ -235,9 +235,6 @@ C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\System.Web.WebPages.Razor.xml
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\System.Web.Optimization.xml
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\ja\Microsoft.AspNet.SignalR.Core.resources.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\ja\Microsoft.AspNet.SignalR.SystemWeb.resources.dll
-C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\ja\Microsoft.Owin.resources.dll
-C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\ja\Microsoft.Owin.Host.SystemWeb.resources.dll
-C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\ja\Microsoft.Owin.Security.resources.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\ja\System.Web.Helpers.resources.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\ja\System.Web.Mvc.resources.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\ja\System.Web.Razor.resources.dll
@@ -253,3 +250,4 @@ C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\Microsoft.CodeAnalysis.CS
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.Migrations.CreateTable.resources
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.csproj.GenerateResource.cache
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.csprojResolveAssemblyReference.cache
+C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\Microsoft.Managed.Core.targets

@@ -11,7 +11,10 @@ namespace AnyChat.Controllers
 {
     public class RoomsController : Controller
     {
+        #region フィールド
         private AnyChatDBContext db = new AnyChatDBContext();
+        private Session _session = new Session();
+        #endregion
 
         // GET: Rooms
         public ActionResult Index()
@@ -57,7 +60,7 @@ namespace AnyChat.Controllers
                 db.SaveChanges();
 
                 //設定した合言葉をクッキーに保存する
-                Request.Cookies[$"roomPw{room.RoomId}"].Value = room.RoomPassword;
+                _session.SetRoomInputPassword(ControllerContext.HttpContext, room.RoomId, room.RoomPassword);
             }
 
             return RedirectToAction("Index", "Home");

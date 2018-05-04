@@ -11,6 +11,7 @@ namespace AnyChat.Controllers
     {
         #region フィールド
         private AnyChatDBContext _db = new AnyChatDBContext();
+        private Session _session = new Session();
         private Guid _wg = new Guid();
         #endregion
 
@@ -50,7 +51,7 @@ namespace AnyChat.Controllers
         /// <returns></returns>
         public ActionResult Entering(Room room)
         {
-            SetRoomInfo(room);
+            _session.SetRoomInfo(ControllerContext.HttpContext, _wg, room);
             return View(room);
         }
         /// <summary>
@@ -60,8 +61,8 @@ namespace AnyChat.Controllers
         /// <returns></returns>
         public ActionResult EnteringToChat(string txtRoomPassword)
         {
-            var room = GetRoomInfo();
-            SetRoomInputPassword(room.RoomId, txtRoomPassword);
+            var room = _session.GetRoomInfo(ControllerContext.HttpContext, _wg);
+            _session.SetRoomInputPassword(ControllerContext.HttpContext, room.RoomId, txtRoomPassword);
             if (CanEnteringChatRoom(room))
             {
                 return RedirectToAction("Chat", room);
@@ -90,53 +91,21 @@ namespace AnyChat.Controllers
             }
             else
             {
-                var roomPasswordCookie = GetRoomInputPassword(room.RoomId);
+                var roomPasswordSession = _session.GetRoomInputPassword(ControllerContext.HttpContext, room.RoomId);
 
-                //クッキーに合言葉が保持されていなければ合言葉を入力させる
-                if (roomPasswordCookie == null)
+                //セッションに合言葉が保持されていなければ合言葉を入力させる
+                if (roomPasswordSession == null)
                 {
                     canEntering = false;
                 }
                 else
                 {
-                    //正しい合言葉がクッキーに保持されていたら入室する
-                    canEntering = roomPasswordCookie == room.RoomPassword;
+                    //正しい合言葉がセッションに保持されていたら入室する
+                    canEntering = roomPasswordSession == room.RoomPassword;
                 }
             }
 
             return canEntering;
-        }
-        /// <summary>
-        /// セッションに保存したルーム情報を取得
-        /// </summary>
-        /// <returns></returns>
-        private Room GetRoomInfo()
-        {
-            return (Room)(ControllerContext.HttpContext.Session[$"roomInfo{_wg}"]);
-        }
-        /// <summary>
-        /// ルーム情報をセッションにセット
-        /// </summary>
-        /// <param name="roomId"></param>
-        private void SetRoomInfo(Room room)
-        {
-            ControllerContext.HttpContext.Session[$"roomInfo{_wg}"] = room;
-        }
-        /// <summary>
-        /// セッションに保存した入力されたルームパスワードを取得
-        /// </summary>
-        /// <param name="roomId"></param>
-        private string GetRoomInputPassword(int roomId)
-        {
-            return ControllerContext.HttpContext.Session[$"roomPw{roomId}"]?.ToString();
-        }
-        /// <summary>
-        /// 入力したルームパスワードをセッションにセット
-        /// </summary>
-        /// <param name="roomId"></param>
-        private void SetRoomInputPassword(int roomId, string inputRoomPassword)
-        {
-            ControllerContext.HttpContext.Session[$"roomPw{roomId}"] = inputRoomPassword;
         }
         #endregion
     }
