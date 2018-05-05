@@ -1,8 +1,6 @@
 ﻿using AnyChat.Interfaces;
 using System;
 using System.Web;
-using System.Web.Security;
-using Microsoft.ApplicationInsights;
 
 namespace AnyChat.Models
 {
@@ -11,9 +9,11 @@ namespace AnyChat.Models
         #region コンストラクタ
         public SessionRepository()
         {
-            if (HttpContext.Current.Session["wg"] == null)
+            //クッキーを取得する場合は Request
+            if (HttpContext.Current.Request.Cookies["anyChatWg"]== null)
             {
-                HttpContext.Current.Session["wg"] = Guid.NewGuid();
+                //クッキーを設定する場合は Response
+                HttpContext.Current.Response.Cookies["anyChatWg"].Value = Guid.NewGuid().ToString();
             }
         }
         #endregion
@@ -25,7 +25,7 @@ namespace AnyChat.Models
         /// <returns></returns>
         public Guid GetWindowGuid()
         {
-            return (Guid)(HttpContext.Current.Session["wg"]);
+            return Guid.Parse(HttpContext.Current.Request.Cookies["anyChatWg"].Value);
         }
         /// <summary>
         /// セッションに保存したルーム情報を取得
