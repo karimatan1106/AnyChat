@@ -5,6 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AnyChat.Data;
+using AnyChat.Interfaces;
 using AnyChat.Models;
 
 namespace AnyChat.Controllers
@@ -13,11 +14,18 @@ namespace AnyChat.Controllers
     {
         #region フィールド
         private AnyChatDBContext db = new AnyChatDBContext();
-        private Session _session = new Session();
+        private SessionRepository _sessionRepository;
         #endregion
 
+        #region コンストラクタ
+        public RoomsController(ISessionRepository sessionRepository)
+        {
+            _sessionRepository = (SessionRepository)sessionRepository;
+            //_session = new Session(ControllerContext.HttpContext, new Guid());
+        }
+        #endregion
         // GET: Rooms
-        public ActionResult Index()
+        public ActionResult Index(ISessionRepository sessionReposiotry)
         {
             return View(db.Rooms.ToList());
         }
@@ -52,15 +60,15 @@ namespace AnyChat.Controllers
         {
             if (ModelState.IsValid)
             {
-               room.RoomName = HttpUtility.HtmlEncode(room.RoomName);
+                room.RoomName = HttpUtility.HtmlEncode(room.RoomName);
                 room.RoomPassword = HttpUtility.HtmlEncode(room.RoomPassword);
                 room.CreateDateTime = DateTime.Now;
                 room.RoomId = db.Rooms.Max(x => x.RoomId) + 1;
                 db.Rooms.Add(room);
                 db.SaveChanges();
 
-                //設定した合言葉をクッキーに保存する
-                _session.SetRoomInputPassword(ControllerContext.HttpContext, room.RoomId, room.RoomPassword);
+                //設定した合言葉をセッションに保存する
+                _sessionRepository.SetRoomInputPassword(room.RoomId, room.RoomPassword);
             }
 
             return RedirectToAction("Index", "Home");

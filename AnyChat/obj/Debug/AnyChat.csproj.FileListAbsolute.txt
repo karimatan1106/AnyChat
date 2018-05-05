@@ -145,16 +145,13 @@ C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\Microsoft.CSharp.Core.tar
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\Microsoft.VisualBasic.Core.targets
-C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\Microsoft.Win32.Primitives.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.AppContext.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.Collections.Immutable.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.Console.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
-C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.Diagnostics.Process.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.Diagnostics.StackTrace.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.IO.Compression.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.IO.FileSystem.dll
-C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.IO.FileSystem.DriveInfo.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.IO.FileSystem.Primitives.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.IO.Pipes.AccessControl.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.IO.Pipes.dll
@@ -167,7 +164,6 @@ C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.Security.Cryptogra
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.Security.Principal.Windows.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.Text.Encoding.CodePages.dll
-C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.Threading.Thread.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.ValueTuple.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.Xml.ReaderWriter.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\System.Xml.XmlDocument.dll
@@ -249,5 +245,8 @@ C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.pdb
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.Migrations.CreateTable.resources
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.csproj.GenerateResource.cache
-C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.csprojResolveAssemblyReference.cache
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\Unity.Abstractions.dll
+C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\Unity.Container.dll
+C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\Unity.Mvc.dll
+C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\WebActivatorEx.dll

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AnyChat.Data;
+using AnyChat.Interfaces;
 using AnyChat.Models;
 
 namespace AnyChat.Controllers
@@ -11,8 +12,16 @@ namespace AnyChat.Controllers
     {
         #region フィールド
         private AnyChatDBContext _db = new AnyChatDBContext();
-        private Session _session = new Session();
-        private Guid _wg = new Guid();
+        private SessionRepository _sessionRepository;
+        //private Session _session;
+        #endregion
+
+        #region コンストラクタ
+        public HomeController(ISessionRepository sessionRepository)
+        {
+            _sessionRepository = (SessionRepository)sessionRepository;
+            //_session = new Session(ControllerContext.HttpContext, new Guid());
+        }
         #endregion
 
         #region アクションメソッド
@@ -33,6 +42,9 @@ namespace AnyChat.Controllers
             var roomInfo = _db.Rooms.First(x => x.RoomId == roomId);
             var canEntering = CanEnteringChatRoom(roomInfo);
 
+            //ルーム情報をセッションに保持する
+            _sessionRepository.SetRoomInfo(roomInfo);
+
             if (canEntering)
             {
                 return View(_db.Chats
@@ -41,31 +53,24 @@ namespace AnyChat.Controllers
             }
             else
             {
-                return RedirectToAction("Entering", roomInfo);
+                return View("Entering", roomInfo);
             }
         }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="room"></param>
-        /// <returns></returns>
-        public ActionResult Entering(Room room)
-        {
-            _session.SetRoomInfo(ControllerContext.HttpContext, _wg, room);
-            return View(room);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="room"></param>
+        /// <param name="txtRoomPassword"></param>
         /// <returns></returns>
         public ActionResult EnteringToChat(string txtRoomPassword)
         {
-            var room = _session.GetRoomInfo(ControllerContext.HttpContext, _wg);
-            _session.SetRoomInputPassword(ControllerContext.HttpContext, room.RoomId, txtRoomPassword);
+            var room = _sessionRepository.GetRoomInfo();
+
+            //入力された合言葉をセッションに保持する
+            _sessionRepository.SetRoomInputPassword(room.RoomId, txtRoomPassword);
+
             if (CanEnteringChatRoom(room))
             {
-                return RedirectToAction("Chat", room);
+                return Redirect($"/Home/Chat?roomId={room.RoomId}");
             }
             else
             {
@@ -91,7 +96,7 @@ namespace AnyChat.Controllers
             }
             else
             {
-                var roomPasswordSession = _session.GetRoomInputPassword(ControllerContext.HttpContext, room.RoomId);
+                var roomPasswordSession = _sessionRepository.GetRoomInputPassword(room.RoomId);
 
                 //セッションに合言葉が保持されていなければ合言葉を入力させる
                 if (roomPasswordSession == null)
