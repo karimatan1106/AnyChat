@@ -13,6 +13,13 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             <div class="col-md-12">
+                @Html.EditorFor(model => model.RoomCreater, new { htmlAttributes = new { @class = "form-control", @placeholder = "ルーム作成者を入力してください" } })
+                @Html.ValidationMessageFor(model => model.RoomCreater, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
                 @Html.EditorFor(model => model.RoomName, new { htmlAttributes = new { @class = "form-control", @placeholder = "ルーム名を入力してください" } })
                 @Html.ValidationMessageFor(model => model.RoomName, "", new { @class = "text-danger" })
             </div>

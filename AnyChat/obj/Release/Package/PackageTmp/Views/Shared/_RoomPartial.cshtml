@@ -19,7 +19,6 @@
                     <li class="list-group-item list-group-item-action" style="display:inline-block;margin:3px 0 0 -15px;padding:0;">
                         <a href=@roomUri class="list-group-item" style="display:block;width:100%;">
                             @Html.Raw(room.RoomName)
-
                             @if (room.Chats == null)
                             {
                                 <span class="badge">0</span>
@@ -39,7 +38,11 @@
                     var roomUri = $"/Home/Chat?roomId={@room.RoomId}";
                     <li class="list-group-item list-group-item-action" style="display:inline-block;margin:3px 0 0 -15px;padding:0;">
                         <a href=@roomUri class="list-group-item" style="display:block;width:100%;">
+                            ルーム名     ：
                             @Html.Raw(room.RoomName)
+                            <br/>
+                             ルーム作成者：
+                            @Html.Raw(room.RoomCreater)
 
                             @if (room.Chats == null)
                             {

@@ -250,4 +250,5 @@ C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\Unity.Abstractions.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\Unity.Container.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\Unity.Mvc.dll
 C:\Users\y\Documents\GitHub\AnyChat\AnyChat\bin\WebActivatorEx.dll
-C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.csprojResolveAssemblyReference.cache
+C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.Migrations.AlterTableRoomsAddRoomCreater.resources
+C:\Users\y\Documents\GitHub\AnyChat\AnyChat\obj\Debug\AnyChat.Migrations.AlterTableRoomsAddRoomGuid.resources

@@ -56,22 +56,26 @@ namespace AnyChat.Controllers
         // 詳細については、https://go.microsoft.com/fwlink/?LinkId=317598 を参照してください。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RoomId,RoomName,RoomPassword,CreateDateTime,IsPublicRoom,DisplayOrder")] Room room)
+        public ActionResult Create([Bind(Include = "RoomId,RoomCreater,RoomName,RoomPassword,CreateDateTime,IsPublicRoom,DisplayOrder")] Room room)
         {
             if (ModelState.IsValid)
             {
+                var roomPassword = room.RoomPassword;
+
+                room.RoomGuid = Guid.NewGuid();
+                room.RoomPassword = SafePassword.GetSaltedPassword(room.RoomGuid.ToString(), roomPassword);
                 room.RoomName = HttpUtility.HtmlEncode(room.RoomName);
+                room.RoomCreater = HttpUtility.HtmlEncode(room.RoomCreater);
                 room.CreateDateTime = DateTime.Now;
-                room.RoomId = _db.Rooms.Max(x => x.RoomId) + 1;
-                room.RoomPassword = SafePassword.GetSaltedPassword(room.RoomId.ToString(), room.RoomPassword);
-                _db.Rooms.Add(room);
+                
+                room = _db.Rooms.Add(room);
                 _db.SaveChanges();
 
                 //設定した合言葉をセッションに保存する
-                _sessionRepository.SetRoomInputPassword(room.RoomId, room.RoomPassword);
+                _sessionRepository.SetRoomInputPassword(room.RoomGuid, roomPassword);
             }
 
-            return RedirectToAction("Index", "Home");
+            return Redirect($"/Home/Chat?roomId={room.RoomId}");
         }
 
         // GET: Rooms/Edit/5

@@ -67,7 +67,7 @@ namespace AnyChat.Controllers
             var room = _sessionRepository.GetRoomInfo();
 
             //入力された合言葉をセッションに保持する
-            _sessionRepository.SetRoomInputPassword(room.RoomId, txtRoomPassword);
+            _sessionRepository.SetRoomInputPassword(room.RoomGuid, txtRoomPassword);
 
             if (CanEnteringChatRoom(room))
             {
@@ -97,7 +97,7 @@ namespace AnyChat.Controllers
             }
             else
             {
-                var roomPasswordSession = _sessionRepository.GetRoomInputPassword(room.RoomId);
+                var roomPasswordSession = _sessionRepository.GetRoomInputPassword(room.RoomGuid);
 
                 //セッションに合言葉が保持されていなければ合言葉を入力させる
                 if (roomPasswordSession == null)

@@ -56,7 +56,7 @@
             connection.start().done(function () {
                 onSuccessConnection();
             }).fail(function (error) {
-                console.log('Invocation of start failed. Error:' + error)
+                onFailedConnection();
             });
         }, 5000); // Restart connection after 5 seconds.
     });
@@ -65,7 +65,7 @@
     connection.start().done(function () {
         onSuccessConnection();
     }).fail(function (error) {
-        console.log('Invocation of start failed. Error:' + error)
+        onFailedConnection();
     });
 
     //接続成功時に発火
@@ -73,6 +73,10 @@
         roomId = getQueryString()["roomId"];
         groupName = "Group" + roomId;
         echo.invoke("join", groupName);
+    }
+    //接続失敗時に発火
+    function onFailedConnection() {
+        console.log("Invocation of start failed. Error:" + error);
     }
 
     function getQueryString() {
@@ -82,7 +86,7 @@
         hash = url.slice(1).split('&');
         max = hash.length;
         for (var i = 0; i < max; i++) {
-            array = hash[i].split('=');
+            array = hash[i].split("=");
             vars.push(array[0]);
             vars[array[0]] = array[1];
         }

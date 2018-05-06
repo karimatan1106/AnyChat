@@ -47,16 +47,16 @@ namespace AnyChat.Models
         /// <summary>
         /// セッションに保存した入力されたルームパスワードを取得
         /// </summary>
-        public string GetRoomInputPassword(int roomId)
+        public string GetRoomInputPassword(Guid roomGuid)
         {
-            return HttpContext.Current.Session[$"roomPw{roomId}"]?.ToString();
+            return HttpContext.Current.Session[$"roomPw{roomGuid.ToString()}"]?.ToString();
         }
         /// <summary>
         /// 入力したルームパスワードをセッションにセット
         /// </summary>
-        public void SetRoomInputPassword(int roomId, string inputRoomPassword)
+        public void SetRoomInputPassword(Guid roomGuid, string inputRoomPassword)
         {
-            HttpContext.Current.Session[$"roomPw{roomId}"] = SafePassword.GetSaltedPassword(roomId.ToString(), inputRoomPassword);
+            HttpContext.Current.Session[$"roomPw{roomGuid.ToString()}"] = SafePassword.GetSaltedPassword(roomGuid.ToString(), inputRoomPassword);
         }
 
         public void Dispose()
