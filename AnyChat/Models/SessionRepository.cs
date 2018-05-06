@@ -15,6 +15,9 @@ namespace AnyChat.Models
                 //クッキーを設定する場合は Response
                 HttpContext.Current.Response.Cookies["anyChatWg"].Value = Guid.NewGuid().ToString();
             }
+
+            //有効期限を1週間与える
+            HttpContext.Current.Response.Cookies["anyChatWg"].Expires = DateTime.Now.AddDays(7);
         }
         #endregion
 
