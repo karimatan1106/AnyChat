@@ -200,6 +200,7 @@
     <Compile Include="Models\AnyChatInitializer.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Chat.cs" />
+    <Compile Include="Models\SafePassword.cs" />
     <Compile Include="Models\SessionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

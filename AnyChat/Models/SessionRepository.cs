@@ -56,7 +56,7 @@ namespace AnyChat.Models
         /// </summary>
         public void SetRoomInputPassword(int roomId, string inputRoomPassword)
         {
-            HttpContext.Current.Session[$"roomPw{roomId}"] = inputRoomPassword;
+            HttpContext.Current.Session[$"roomPw{roomId}"] = SafePassword.GetSaltedPassword(roomId.ToString(), inputRoomPassword);
         }
 
         public void Dispose()

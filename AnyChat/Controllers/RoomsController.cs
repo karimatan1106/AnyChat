@@ -13,7 +13,7 @@ namespace AnyChat.Controllers
     public class RoomsController : Controller
     {
         #region フィールド
-        private AnyChatDBContext db = new AnyChatDBContext();
+        private AnyChatDBContext _db = new AnyChatDBContext();
         private SessionRepository _sessionRepository;
         #endregion
 
@@ -27,7 +27,7 @@ namespace AnyChat.Controllers
         // GET: Rooms
         public ActionResult Index(ISessionRepository sessionReposiotry)
         {
-            return View(db.Rooms.ToList());
+            return View(_db.Rooms.ToList());
         }
 
         // GET: Rooms/Details/5
@@ -37,7 +37,7 @@ namespace AnyChat.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Room room = db.Rooms.Find(id);
+            Room room = _db.Rooms.Find(id);
             if (room == null)
             {
                 return HttpNotFound();
@@ -61,11 +61,11 @@ namespace AnyChat.Controllers
             if (ModelState.IsValid)
             {
                 room.RoomName = HttpUtility.HtmlEncode(room.RoomName);
-                room.RoomPassword = HttpUtility.HtmlEncode(room.RoomPassword);
                 room.CreateDateTime = DateTime.Now;
-                room.RoomId = db.Rooms.Max(x => x.RoomId) + 1;
-                db.Rooms.Add(room);
-                db.SaveChanges();
+                room.RoomId = _db.Rooms.Max(x => x.RoomId) + 1;
+                room.RoomPassword = SafePassword.GetSaltedPassword(room.RoomId.ToString(), room.RoomPassword);
+                _db.Rooms.Add(room);
+                _db.SaveChanges();
 
                 //設定した合言葉をセッションに保存する
                 _sessionRepository.SetRoomInputPassword(room.RoomId, room.RoomPassword);
@@ -81,7 +81,7 @@ namespace AnyChat.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Room room = db.Rooms.Find(id);
+            Room room = _db.Rooms.Find(id);
             if (room == null)
             {
                 return HttpNotFound();
@@ -98,8 +98,8 @@ namespace AnyChat.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(room).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(room).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(room);
@@ -112,7 +112,7 @@ namespace AnyChat.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Room room = db.Rooms.Find(id);
+            Room room = _db.Rooms.Find(id);
             if (room == null)
             {
                 return HttpNotFound();
@@ -125,9 +125,9 @@ namespace AnyChat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Room room = db.Rooms.Find(id);
-            db.Rooms.Remove(room);
-            db.SaveChanges();
+            Room room = _db.Rooms.Find(id);
+            _db.Rooms.Remove(room);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -135,7 +135,7 @@ namespace AnyChat.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
