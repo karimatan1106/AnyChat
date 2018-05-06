@@ -26,9 +26,9 @@ namespace AnyChat.Models
         /// セッションに保持したWindowGuidをセット
         /// </summary>
         /// <returns></returns>
-        public Guid GetWindowGuid()
+        public string GetWindowGuid()
         {
-            return Guid.Parse(HttpContext.Current.Request.Cookies["anyChatWg"].Value);
+            return HttpContext.Current.Request.Cookies["anyChatWg"].Value;
         }
         /// <summary>
         /// セッションに保存したルーム情報を取得
