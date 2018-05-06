@@ -61,6 +61,7 @@ namespace AnyChat.Controllers
         /// </summary>
         /// <param name="txtRoomPassword"></param>
         /// <returns></returns>
+        [ValidateInput(false)]
         public ActionResult EnteringToChat(string txtRoomPassword)
         {
             var room = _sessionRepository.GetRoomInfo();
