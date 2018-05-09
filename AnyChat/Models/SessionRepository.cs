@@ -1,34 +1,21 @@
 ﻿using AnyChat.Interfaces;
 using System;
+using System.Configuration;
 using System.Web;
+using System.Web.Configuration;
 
 namespace AnyChat.Models
 {
     public class SessionRepository : ISessionRepository, IDisposable
     {
-        #region コンストラクタ
-        public SessionRepository()
-        {
-            //クッキーを取得する場合は Request
-            if (HttpContext.Current.Request.Cookies["anyChatWg"]== null)
-            {
-                //クッキーを設定する場合は Response
-                HttpContext.Current.Response.Cookies["anyChatWg"].Value = Guid.NewGuid().ToString();
-            }
-
-            //有効期限を1週間与える
-            HttpContext.Current.Response.Cookies["anyChatWg"].Expires = DateTime.Now.AddDays(7);
-        }
-        #endregion
-
         #region メソッド
         /// <summary>
-        /// セッションに保持したWindowGuidをセット
+        /// セッションIDを取得
         /// </summary>
         /// <returns></returns>
         public string GetWindowGuid()
         {
-            return HttpContext.Current.Request.Cookies["anyChatWg"].Value;
+            return HttpContext.Current.Session.SessionID;
         }
         /// <summary>
         /// セッションに保存したルーム情報を取得
